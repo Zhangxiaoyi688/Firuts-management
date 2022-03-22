@@ -17,10 +17,12 @@
 //    double all_Money;
 //}supermarket;
 
+//char name[20 + 1] = { 0 };
+
 struct  member
 {
-    char id[30];	                     //用户账号
-    char key[20];                       //用户账号密码
+    char id[20+1]={0};	                     //用户账号
+    char key[20+1]={0};                       //用户账号密码
     
     double money = 0;                         //用户余额                  
     struct  member* next;                //节点指针
@@ -45,7 +47,7 @@ int LogInMem(char name[]);
 void SaveMem(Mem* head);
 
 //会员登录主界面
-void MemLogIn();
+void MemLogInMenu();
 
 //会员个人信息界面
 void MemMenu(char name[]);

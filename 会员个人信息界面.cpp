@@ -18,6 +18,8 @@ void MemMenu(char name[])
 void ShowMemMenu(int choice, char name[]) {
 	switch (choice)
 	{
+	case 0:
+		exit(0);
 	case 1:  //Óà¶î²éÑ¯
 		CheckMemMoney(name);
 		break;
@@ -42,6 +44,11 @@ void CheckMemMoney(char name[])
 			flag = 1;
 			break;
 		}
+		else
+		{
+			printf("²éÑ¯Ê§°Ü£¡");
+			getchar();
+		}
 		p = p->next;
 	}
 
@@ -50,7 +57,7 @@ void CheckMemMoney(char name[])
 
 void RechargeMoney(char name[])
 {
-	Mem* head, * p = NULL;
+	Mem* head = NULL, * p = NULL;
 	int i = 0, flag = 0;
 	double money;
 	char keyword[30];
@@ -65,7 +72,8 @@ void RechargeMoney(char name[])
 		printf("* ");   //±£»¤ÓÃ»§ÒşË½
 		i++;
 	}
-	p = head = read_Count();
+	head = read_Count();
+	p = read_Count();
 	while (p != NULL)
 	{
 		if (strcmp(name, p->id) == 0 && strcmp(keyword, p->key))
@@ -76,6 +84,11 @@ void RechargeMoney(char name[])
 			flag = 1;
 			break;
 		}
+		/*else
+		{
+			printf("³äÖµÊ§°Ü£¡");
+			getchar();
+		}*/
 		p = p->next;
 	}
 	SaveMem(head);

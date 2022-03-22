@@ -6,7 +6,7 @@ int main(){
 	
 	LogInMem();*/
 
-	MemLogIn();
+	MemLogInMenu();
 
 	return 0;
 }

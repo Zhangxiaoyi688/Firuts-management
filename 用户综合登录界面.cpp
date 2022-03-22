@@ -1,11 +1,11 @@
 #include "会员head.h"
 
 //用户登录界面
-void MemLogIn()
+void MemLogInMenu()
 {
 	int sw = 0;
 	int cnt = 0;
-	char name[30];
+	char name[30] = { 0 };
 
 	while (true)
 	{
@@ -27,8 +27,9 @@ void MemLogIn()
 		{
 		FLAG:if (LogInMem(name)) 
 		{
+			printf("登录成功！！！");
 			MemMenu(name);
-			//printf("登录成功！！！");
+			
 			//system("pause");//登录成功，展示会员界面
 		}
 		else
