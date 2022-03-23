@@ -8,5 +8,8 @@ int main(){
 
 	MemLogInMenu();
 
+	//Mem* head = read_Count();
+
+
 	return 0;
 }

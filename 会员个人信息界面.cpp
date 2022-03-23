@@ -33,7 +33,38 @@ void ShowMemMenu(int choice, char name[]) {
 
 void CheckMemMoney(char name[]) 
 {
-	Mem* head, * p = NULL;
+	FILE* fp;
+	Mem* p, * q, * head = NULL, * ptr;
+	if ((fp = fopen("zhanghao.txt", "r")) == 0) {
+		printf("\n无法查询到该账号");
+		return;
+	}
+	rewind(fp);
+	p = (Mem*)malloc(sizeof(Mem));
+	//memset(p, 0x00, sizeof(Mem));
+	head = q = p;
+	while (!feof(fp)) {
+		if (fread(p, sizeof(Mem), 1, fp) != 1) {
+			break;
+		}
+		p->next = (Mem*)malloc(sizeof(Mem));
+		//memset(p->next, 0x00, sizeof(Mem));
+		q = p;           //q是真正的尾节点
+		p = p->next;     //p向后移动一个节点
+	}
+	q->next = NULL;
+	fclose(fp);
+	ptr = head;
+	while (ptr != NULL) {
+		if (strcmp(ptr->id, name) == 0) {
+			printf("您的余额为： %2lf", ptr->money);
+			break;
+		}
+		ptr = ptr->next;
+	}
+	
+
+	/*Mem* head, * p = NULL;
 	int flag = 0;
 	p = head = read_Count();
 	while (p != NULL)
@@ -50,14 +81,14 @@ void CheckMemMoney(char name[])
 			getchar();
 		}
 		p = p->next;
-	}
+	}*/
 
 }
 
 
 void RechargeMoney(char name[])
 {
-	Mem* head = NULL, * p = NULL;
+	//Mem* head = NULL, * p = NULL;
 	int i = 0, flag = 0;
 	double money;
 	char keyword[30];
@@ -72,7 +103,40 @@ void RechargeMoney(char name[])
 		printf("* ");   //保护用户隐私
 		i++;
 	}
-	head = read_Count();
+	FILE* fp;
+	Mem* p, * q, * head = NULL, * ptr;
+	if ((fp = fopen("zhanghao.txt", "r")) == 0) {
+		printf("\n无法查询到该账号");
+		return;
+	}
+	rewind(fp);
+	p = (Mem*)malloc(sizeof(Mem));
+	//memset(p, 0x00, sizeof(Mem));
+	head = q = p;
+	while (!feof(fp)) {
+		if (fread(p, sizeof(Mem), 1, fp) != 1) {
+			break;
+		}
+		p->next = (Mem*)malloc(sizeof(Mem));
+		//memset(p->next, 0x00, sizeof(Mem));
+		q = p;           //q是真正的尾节点
+		p = p->next;     //p向后移动一个节点
+	}
+	q->next = NULL;
+	fclose(fp);
+	ptr = head;
+	
+	while (ptr != NULL) {
+		if (strcmp(ptr->id, name) == 0 && strcmp(keyword, p->key) == 0) {
+			printf("请输入您要充值的金额： ");
+			scanf_s("%lf", &money);
+			ptr->money += money;
+			break;
+		}
+		ptr = ptr->next;
+	}
+	SaveMem(head);
+	/*head = read_Count();
 	p = read_Count();
 	while (p != NULL)
 	{
@@ -83,13 +147,13 @@ void RechargeMoney(char name[])
 			p->money += money;
 			flag = 1;
 			break;
-		}
+		}*/
 		/*else
 		{
 			printf("充值失败！");
 			getchar();
 		}*/
-		p = p->next;
-	}
-	SaveMem(head);
+		/*p = p->next;*/
+	
+	
 }
